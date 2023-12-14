@@ -12,31 +12,25 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersService = void 0;
-const common_1 = require("@nestjs/common");
+exports.CategoryService = void 0;
 const typeorm_1 = require("@nestjs/typeorm");
-const User_1 = require("../../../typeorm/entities/User");
+const common_1 = require("@nestjs/common");
+const Category_1 = require("../typeorm/entities/Category");
 const typeorm_2 = require("typeorm");
-let UsersService = class UsersService {
-    constructor(userRepo) {
-        this.userRepo = userRepo;
+let CategoryService = class CategoryService {
+    constructor(categoryRepo) {
+        this.categoryRepo = categoryRepo;
     }
-    fetchUsers() {
-        console.log("callinggggggggggg");
-        const userList = this.userRepo.find();
-        return userList;
-    }
-    createUser(userDetails) {
-        const newUser = this.userRepo.create({
-            ...userDetails, createdAt: new Date()
-        });
-        return this.userRepo.save(newUser);
+    createCategory(category) {
+        console.log(category);
+        const newCategory = this.categoryRepo.create(category);
+        return this.categoryRepo.save(newCategory);
     }
 };
-UsersService = __decorate([
+CategoryService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(User_1.User)),
+    __param(0, (0, typeorm_1.InjectRepository)(Category_1.Category)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], UsersService);
-exports.UsersService = UsersService;
-//# sourceMappingURL=users.service.js.map
+], CategoryService);
+exports.CategoryService = CategoryService;
+//# sourceMappingURL=category.service.js.map

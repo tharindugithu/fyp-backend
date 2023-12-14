@@ -1,4 +1,4 @@
-import {Entity,PrimaryGeneratedColumn,Column} from 'typeorm'
+import {Entity,PrimaryGeneratedColumn,Column, OneToMany} from 'typeorm'
 
 
 @Entity({name:'users'})
@@ -14,4 +14,5 @@ export class User {
 
   @Column()
   createdAt:Date;
+
 }

@@ -12,31 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersService = void 0;
+exports.CategoryController = void 0;
+const CreateCategory_dto_1 = require("./../dtos/CreateCategory.dto");
+const category_service_1 = require("./category.service");
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("@nestjs/typeorm");
-const User_1 = require("../../../typeorm/entities/User");
-const typeorm_2 = require("typeorm");
-let UsersService = class UsersService {
-    constructor(userRepo) {
-        this.userRepo = userRepo;
+let CategoryController = class CategoryController {
+    constructor(categoryService) {
+        this.categoryService = categoryService;
     }
-    fetchUsers() {
-        console.log("callinggggggggggg");
-        const userList = this.userRepo.find();
-        return userList;
-    }
-    createUser(userDetails) {
-        const newUser = this.userRepo.create({
-            ...userDetails, createdAt: new Date()
-        });
-        return this.userRepo.save(newUser);
+    async createCategory(categoryDto) {
+        return this.categoryService.createCategory(categoryDto);
     }
 };
-UsersService = __decorate([
-    (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(User_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
-], UsersService);
-exports.UsersService = UsersService;
-//# sourceMappingURL=users.service.js.map
+__decorate([
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CreateCategory_dto_1.CreateCategoryDto]),
+    __metadata("design:returntype", Promise)
+], CategoryController.prototype, "createCategory", null);
+CategoryController = __decorate([
+    (0, common_1.Controller)('category'),
+    __metadata("design:paramtypes", [category_service_1.CategoryService])
+], CategoryController);
+exports.CategoryController = CategoryController;
+//# sourceMappingURL=category.controller.js.map

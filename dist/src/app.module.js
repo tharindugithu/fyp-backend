@@ -7,12 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const Activity_1 = require("./typeorm/entities/Activity");
+const Tutorial_1 = require("./typeorm/entities/Tutorial");
+const Course_1 = require("./typeorm/entities/Course");
+const Category_1 = require("./typeorm/entities/Category");
 const User_1 = require("./typeorm/entities/User");
 const common_1 = require("@nestjs/common");
 const auth_module_1 = require("./auth/auth.module");
 const bookmark_module_1 = require("./bookmark/bookmark.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./users/users.module");
+const category_module_1 = require("./category/category.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -24,9 +29,10 @@ AppModule = __decorate([
                 username: 'root',
                 password: '1234',
                 database: 'nestjstest',
-                entities: [User_1.User],
-                synchronize: true
-            }), users_module_1.UsersModule],
+                entities: [User_1.User, Category_1.Category, Course_1.Course, Tutorial_1.Tutorial, Activity_1.Activity],
+                synchronize: true,
+                logging: true,
+            }), users_module_1.UsersModule, category_module_1.CategoryModule],
     })
 ], AppModule);
 exports.AppModule = AppModule;

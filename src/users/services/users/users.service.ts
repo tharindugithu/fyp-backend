@@ -11,11 +11,7 @@ export class UsersService {
     
     fetchUsers(){
       console.log("callinggggggggggg")
-      const userList = this.userRepo.find({
-        where: {
-            username: ILike('%qq%'),
-        },
-      })
+      const userList = this.userRepo.find()
       return userList
     }
 
