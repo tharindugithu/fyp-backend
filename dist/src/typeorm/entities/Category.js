@@ -34,6 +34,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Course_1.Course, course => course.category),
     __metadata("design:type", Array)
 ], Category.prototype, "courses", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' }),
+    __metadata("design:type", Date)
+], Category.prototype, "createdAt", void 0);
 Category = __decorate([
     (0, typeorm_1.Entity)({ name: 'categories' })
 ], Category);

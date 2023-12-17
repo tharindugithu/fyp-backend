@@ -4,4 +4,10 @@ export declare class CategoryController {
     categoryService: CategoryService;
     constructor(categoryService: CategoryService);
     createCategory(categoryDto: CreateCategoryDto): Promise<import("../typeorm/entities/Category").Category>;
+    getCategories(): Promise<import("../typeorm/entities/Category").Category[]>;
+    updateCategory(categoryId: number, updatedCategory: CreateCategoryDto): Promise<import("../typeorm/entities/Category").Category>;
+    deleteCategory(categoryId: number): Promise<{
+        message: string;
+    }>;
+    getSpecificCategories(categoryId: number): Promise<import("../typeorm/entities/Category").Category>;
 }

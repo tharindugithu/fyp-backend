@@ -26,6 +26,47 @@ let CategoryService = class CategoryService {
         const newCategory = this.categoryRepo.create(category);
         return this.categoryRepo.save(newCategory);
     }
+    fetchCategories() {
+        const categories = this.categoryRepo.find();
+        return categories;
+    }
+    async updateCategory(categoryId, updatedCategory) {
+        const existingCategory = await this.categoryRepo.findOne({
+            where: {
+                id: categoryId,
+            },
+        });
+        if (!existingCategory) {
+            throw new common_1.NotFoundException(`Category with ID ${categoryId} not found`);
+        }
+        existingCategory.title = updatedCategory.title;
+        existingCategory.image = updatedCategory.image;
+        existingCategory.description = updatedCategory.description;
+        return this.categoryRepo.save(existingCategory);
+    }
+    async deleteCategory(categoryId) {
+        const existingCategory = await this.categoryRepo.findOne({
+            where: {
+                id: categoryId,
+            },
+        });
+        if (!existingCategory) {
+            throw new common_1.NotFoundException(`Category with ID ${categoryId} not found`);
+        }
+        await this.categoryRepo.remove(existingCategory);
+        return { message: `Category with ID ${categoryId} has been deleted` };
+    }
+    async getSpecificCategory(categoryId) {
+        const existingCategory = await this.categoryRepo.findOne({
+            where: {
+                id: categoryId,
+            },
+        });
+        if (!existingCategory) {
+            throw new common_1.NotFoundException(`Category with ID ${categoryId} not found`);
+        }
+        return existingCategory;
+    }
 };
 CategoryService = __decorate([
     (0, common_1.Injectable)(),

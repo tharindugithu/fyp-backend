@@ -19,6 +19,6 @@ export class Category{
   @OneToMany(() => Course, course => course.category)
   courses: Course[];
 
-  // @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  // createdAt: Date;
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 }

@@ -23,6 +23,19 @@ let CategoryController = class CategoryController {
     async createCategory(categoryDto) {
         return this.categoryService.createCategory(categoryDto);
     }
+    async getCategories() {
+        return this.categoryService.fetchCategories();
+    }
+    async updateCategory(categoryId, updatedCategory) {
+        return this.categoryService.updateCategory(categoryId, updatedCategory);
+    }
+    async deleteCategory(categoryId) {
+        return this.categoryService.deleteCategory(categoryId);
+    }
+    async getSpecificCategories(categoryId) {
+        console.log("get cat call");
+        return this.categoryService.getSpecificCategory(categoryId);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -31,6 +44,34 @@ __decorate([
     __metadata("design:paramtypes", [CreateCategory_dto_1.CreateCategoryDto]),
     __metadata("design:returntype", Promise)
 ], CategoryController.prototype, "createCategory", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoryController.prototype, "getCategories", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, CreateCategory_dto_1.CreateCategoryDto]),
+    __metadata("design:returntype", Promise)
+], CategoryController.prototype, "updateCategory", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CategoryController.prototype, "deleteCategory", null);
+__decorate([
+    (0, common_1.Get)('get_category/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CategoryController.prototype, "getSpecificCategories", null);
 CategoryController = __decorate([
     (0, common_1.Controller)('category'),
     __metadata("design:paramtypes", [category_service_1.CategoryService])

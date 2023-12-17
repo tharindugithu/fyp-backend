@@ -5,4 +5,5 @@ export declare class Category {
     image: string;
     description: string;
     courses: Course[];
+    createdAt: Date;
 }
