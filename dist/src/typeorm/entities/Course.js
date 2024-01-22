@@ -26,6 +26,10 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
+], Course.prototype, "image", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
 ], Course.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Category_1.Category, category => category.courses),
@@ -35,6 +39,10 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Tutorial_1.Tutorial, tutorial => tutorial.course),
     __metadata("design:type", Array)
 ], Course.prototype, "tutorials", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' }),
+    __metadata("design:type", Date)
+], Course.prototype, "createdAt", void 0);
 Course = __decorate([
     (0, typeorm_1.Entity)({ name: 'courses' })
 ], Course);

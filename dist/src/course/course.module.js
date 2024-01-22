@@ -6,12 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BookmarkModule = void 0;
+exports.CourseModule = void 0;
 const common_1 = require("@nestjs/common");
-let BookmarkModule = class BookmarkModule {
+const course_service_1 = require("./course.service");
+const course_controller_1 = require("./course.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const Course_1 = require("../typeorm/entities/Course");
+let CourseModule = class CourseModule {
 };
-BookmarkModule = __decorate([
-    (0, common_1.Module)({})
-], BookmarkModule);
-exports.BookmarkModule = BookmarkModule;
-//# sourceMappingURL=bookmark.module.js.map
+CourseModule = __decorate([
+    (0, common_1.Module)({
+        imports: [typeorm_1.TypeOrmModule.forFeature([Course_1.Course])],
+        providers: [course_service_1.CourseService],
+        controllers: [course_controller_1.CourseController],
+    })
+], CourseModule);
+exports.CourseModule = CourseModule;
+//# sourceMappingURL=course.module.js.map

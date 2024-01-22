@@ -11,6 +11,9 @@ export class Course {
   title: string;
 
   @Column()
+  image: string;
+  
+  @Column()
   description: string;
 
   @ManyToOne(() => Category, category => category.courses)
@@ -18,4 +21,7 @@ export class Course {
 
   @OneToMany(() => Tutorial, tutorial => tutorial.course)
   tutorials: Tutorial[];
+
+  @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 }
