@@ -9,5 +9,12 @@ export declare class CategoryController {
     deleteCategory(categoryId: number): Promise<{
         message: string;
     }>;
-    getSpecificCategories(categoryId: number): Promise<import("../typeorm/entities/Category").Category>;
+    getSpecificCategories(categoryId: number): Promise<{
+        courses: import("../typeorm/entities/Course").Course[];
+        id: number;
+        title: string;
+        image: string;
+        description: string;
+        createdAt: Date;
+    }>;
 }

@@ -24,7 +24,7 @@ export class CategoryController {
   async deleteCategory(@Param('id') categoryId: number) {
     return this.categoryService.deleteCategory(categoryId);
   }
-  @Get('get_category/:id')
+  @Get('/get_category/:id')
   async getSpecificCategories(@Param('id') categoryId: number){
     console.log("get cat call")
     return this.categoryService.getSpecificCategory(categoryId)

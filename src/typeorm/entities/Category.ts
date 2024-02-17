@@ -13,7 +13,7 @@ export class Category{
   @Column()
   image: string;
 
-  @Column()
+  @Column({length:10000})
   description: string;
 
   @OneToMany(() => Course, course => course.category)

@@ -3,10 +3,12 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Category } from '../typeorm/entities/Category';
 import { Repository } from 'typeorm';
+import { Course } from '../typeorm/entities/Course';
 @Injectable()
 export class CategoryService {
   constructor(
     @InjectRepository(Category) private categoryRepo: Repository<Category>,
+    @InjectRepository(Course) private coursesRepo:Repository<Course>
   ) {}
 
   createCategory(category: CreateCategoryDto) {
@@ -60,11 +62,19 @@ export class CategoryService {
         id: categoryId,
       },
     });
-
+    console.log("cat id",categoryId," space ",existingCategory.image)
     if (!existingCategory) {
       throw new NotFoundException(`Category with ID ${categoryId} not found`);
     }
-
-    return existingCategory;
+    let courses = await this.coursesRepo.find({
+      where: {
+          category:{
+            id:categoryId
+          },
+      },
+      relations: ['tutorials'], // Add any other relations if needed
+  });
+  
+    return {...existingCategory,courses};
   }
 }

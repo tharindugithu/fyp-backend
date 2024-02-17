@@ -17,9 +17,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const common_1 = require("@nestjs/common");
 const Category_1 = require("../typeorm/entities/Category");
 const typeorm_2 = require("typeorm");
+const Course_1 = require("../typeorm/entities/Course");
 let CategoryService = class CategoryService {
-    constructor(categoryRepo) {
+    constructor(categoryRepo, coursesRepo) {
         this.categoryRepo = categoryRepo;
+        this.coursesRepo = coursesRepo;
     }
     createCategory(category) {
         console.log(category);
@@ -62,16 +64,27 @@ let CategoryService = class CategoryService {
                 id: categoryId,
             },
         });
+        console.log("cat id", categoryId, " space ", existingCategory.image);
         if (!existingCategory) {
             throw new common_1.NotFoundException(`Category with ID ${categoryId} not found`);
         }
-        return existingCategory;
+        let courses = await this.coursesRepo.find({
+            where: {
+                category: {
+                    id: categoryId
+                },
+            },
+            relations: ['tutorials'],
+        });
+        return { ...existingCategory, courses };
     }
 };
 CategoryService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(Category_1.Category)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(Course_1.Course)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], CategoryService);
 exports.CategoryService = CategoryService;
 //# sourceMappingURL=category.service.js.map

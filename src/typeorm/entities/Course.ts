@@ -13,7 +13,7 @@ export class Course {
   @Column()
   image: string;
   
-  @Column()
+  @Column({length:10000})
   description: string;
 
   @ManyToOne(() => Category, category => category.courses)
